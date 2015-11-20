@@ -1,0 +1,235 @@
+\ProvidesPackage{beamerthemeCNKposter}  % this style was adapted by David Lukeš
+                                % from an original design by Thomas Deselaers
+                                % and Philippe Dreuw
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{ifthen}
+\RequirePackage{kvoptions}
+
+\SetupKeyvalOptions{
+  prefix=@
+}
+
+\DeclareBoolOption{english}
+\DeclareBoolOption{flushlefttitle}
+\DeclareStringOption[5ex]{raiselogo}
+
+\ProcessKeyvalOptions*
+% \ProcessOptions
+
+\RequirePackage{polyglossia}
+\ifthenelse{\boolean{@english}}{
+  \setmainlanguage{english}
+  \setotherlanguage{czech}
+}{
+  \setmainlanguage{czech}
+  \setotherlanguage{english}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectcolormodel{cmyk}
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{wallpaper}
+\setbeamertemplate{background canvas}{
+  \TileWallPaper{600pt}{600pt}{groovepaper2}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{cnkMagenta}{cmyk}{0,1,0,0}
+\definecolor{cnkCyan}{cmyk}{1,0,0,0}
+\definecolor{cnkGreen}{cmyk}{0.7,0,1,0}
+\definecolor{cnkOrange}{cmyk}{0,0.71,1,0}
+\definecolor{cnkBlack}{cmyk}{0,0,0,1}
+\definecolor{cnkShadow}{cmyk}{0,0.0532,0.1223,0.2627}
+\definecolor{taaluminium}{cmyk}{0,0,0.0084,0.0667}
+\definecolor{ta2aluminium}{cmyk}{0.0186,0,0.0372,0.1569}
+\definecolor{ta3aluminium}{cmyk}{0.0159,0,0.037,0.2588}
+\definecolor{tagray}{cmyk}{0.0145,0,0.0362,0.4588}
+\definecolor{ta2gray}{cmyk}{0.023,0,0.046,0.6588}
+\definecolor{ta3gray}{cmyk}{0.1481,0.037,0,0.7882}
+
+% set colors
+\setbeamercolor{blackstripe}{bg=cnkBlack,fg=white}
+\setbeamercolor{orangestripe}{bg=cnkOrange}
+\setbeamercolor{greenstripe}{bg=cnkGreen}
+\setbeamercolor{cyanstripe}{bg=cnkCyan}
+\setbeamercolor{magentastripe}{bg=cnkMagenta}
+\setbeamercolor{block title}{fg=cnkBlack,bg=cnkBlack!40}
+\setbeamercolor{block body}{bg=cnkBlack!10}
+\setbeamercolor{block title alerted}{fg=cnkBlack,bg=cnkOrange!40}
+\setbeamercolor{block body alerted}{bg=cnkOrange!10}
+\setbeamercolor{block title example}{fg=cnkBlack,bg=cnkCyan!40}
+\setbeamercolor{block body example}{bg=cnkCyan!10}
+\setbeamercolor{alerted text}{fg=cnkMagenta}
+\setbeamercolor{headline}{fg=white,bg=cnkBlack}
+\setbeamercolor{footline}{fg=white,bg=cnkBlack}
+\setbeamercolor{separation line}{bg=cnkMagenta}
+\setbeamercolor{title author institute in headline}{fg=white}
+\setbeamercolor{framesubtitle}{fg=cnkOrange, bg=ta2gray}
+\setbeamercolor{author in head/foot}{fg=white,bg=cnkBlack}
+\setbeamercolor{title in head/foot}{fg=white,bg=cnkBlack}
+\setbeamercolor{upper separation line head}{fg=cnkOrange}
+\setbeamercolor{structure}{fg=cnkCyan}
+% \setbeamercolor{example text}{fg=taorange}
+\setbeamercolor*{normal text}{fg=cnkBlack}%, bg=ta3gray}
+\setbeamercolor*{block body}{bg=ta3aluminium,fg=cnkBlack}
+\setbeamercolor*{block title}{fg=cnkOrange,bg=ta2gray}
+\setbeamercolor*{example body}{fg=ta3aluminium,bg=cnkBlack}
+\setbeamercolor*{example text}{fg=ta3aluminium,bg=cnkBlack}
+\setbeamercolor*{example title}{bg=cnkOrange,fg=ta2gray}
+
+\setbeamerfont{footline}{size=\large,series=\tt}
+\setbeamerfont{block title}{size=\large,series=\bf}
+
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tikz}
+
+\tcbset{common/.style={
+    skin=enhanced,
+    fuzzy halo=0.2ex with cnkShadow!40,
+    bottom=1ex,
+    top=1ex,
+    bottomtitle=1ex,
+    toptitle=1ex,
+    lefttitle=1em,
+    boxrule=0pt,
+    titlerule=0.5ex,
+    arc=1ex,
+    title={#1},
+    after=\vspace*{2ex},
+    colbacktitle=white,
+    colback=white,
+    coltitle=cnkBlack,
+  }
+}
+\newtcolorbox{ctblock}[2][]{common={#2},#1,colframe=cnkCyan}
+\newtcolorbox{mtblock}[2][]{common={#2},#1,colframe=cnkMagenta}
+\newtcolorbox{gtblock}[2][]{common={#2},#1,colframe=cnkGreen}
+\newtcolorbox{otblock}[2][]{common={#2},#1,colframe=cnkOrange}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{headline}{
+  \leavevmode
+  \begin{beamercolorbox}[wd=\paperwidth]{headline}
+    \vskip10ex
+    \begin{columns}
+      \begin{column}{.06\paperwidth}
+      \end{column}
+      \begin{column}{.76\paperwidth}
+        \ifthenelse{\boolean{@flushlefttitle}}
+        {
+        }
+        {
+          \raggedleft
+        }
+
+        \usebeamercolor{title in headline}{\color{fg}\textbf{\LARGE{\inserttitle}}\\[1ex]}
+        \usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[1ex]}
+        \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[1ex]}
+      \end{column}
+      \begin{column}{.03\paperwidth}
+      \end{column}
+      \begin{column}{.1\paperwidth}
+        \ifthenelse{\boolean{@english}}
+        {
+          \includegraphics[width=\linewidth]{logo_stacked_en.eps}
+        }
+        {
+          \includegraphics[width=\linewidth]{logo_stacked_cs.eps}
+        }
+        \vspace*{\@raiselogo}
+      \end{column}
+      \begin{column}{.05\paperwidth}
+      \end{column}
+    \end{columns}
+    \vskip5ex
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{footline}{
+  \leavevmode
+  \begin{beamercolorbox}[wd=.78\paperwidth,ht=0.09\paperwidth,left]{blackstripe}%
+    \begin{columns}
+      \begin{column}{.06\paperwidth}%
+      \end{column}%
+      \begin{column}{.25\paperwidth}%
+        \ifthenelse{\boolean{@english}}
+        {
+          \includegraphics[width=0.25\paperwidth]{logo_sideways_en.eps}%
+        }
+        {
+          \includegraphics[width=0.25\paperwidth]{logo_sideways_cs.eps}%
+        }
+      \end{column}%
+      \begin{column}{.02\paperwidth}%
+      \end{column}%
+      \begin{column}{.45\paperwidth}%
+        {\large \url{\website}}%
+
+        \bigskip
+
+        {\large \texttt{\contact}}%
+      \end{column}%
+      \begin{column}{.22\paperwidth}%
+      \end{column}%
+    \end{columns}%
+    \vskip0.025\paperwidth
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.09\paperwidth,center]{blankstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.09\paperwidth,center]{orangestripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.09\paperwidth,center]{blankstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.09\paperwidth,center]{greenstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.09\paperwidth,center]{blankstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.09\paperwidth,center]{cyanstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.09\paperwidth,center]{blankstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.09\paperwidth,center]{magentastripe}%
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display a grid to help align images ... and it looks nice with this color scheme
+%\beamertemplategridbackground[1cm]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<all>
+
+% adapt height of imtemize rectangles
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{itemize item}{\raisebox{0.12ex}{$\blacktriangleright$}\hskip0.1em}
+\setbeamertemplate{itemize subitem}{\raisebox{0.12ex}{$\triangleright$}\hskip0.1em}
+% or define your own template using \defbeamertemplate{itemize item}, see beameruserguide.pdf
+
+% equal font sizes for all levels
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% TeX-master: "poster-surf"
+%%% End:
+
+% set bibliography style
+\setbeamertemplate{bibliography item}[text]
+\setbeamercolor{bibliography item}{fg=cnkBlack,bg=white}
+\setbeamercolor{bibliography entry author}{fg=cnkBlack,bg=white}
+\setbeamercolor{bibliography item}{fg=cnkBlack,bg=white}

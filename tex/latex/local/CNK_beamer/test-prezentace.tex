@@ -1,0 +1,108 @@
+\documentclass{beamer}
+\usetheme[english]{CNK} % [english] => English logo and babel; no option => Czech logo and babel
+
+\usepackage{default}
+%\usepackage{unicode}
+
+% for XeLaTeX
+\usepackage{xltxtra}
+\usepackage{fontspec}
+
+%\usepackage[czech]{babel} % has already been included by the theme style file (depending on language selected as option)
+
+\title{Prezentace ÚČNK s~titulkem na dva řádky}
+\author{Josef Prezent}
+%\date{\today} % not shown by the current theme template!
+
+%\usepackage{multicol}
+\begin{document}
+
+\makeCNK
+
+\maketitle
+
+%\section[Contents]{Contents}
+%\frame{\tableofcontents}
+
+\section{Kapitola A}
+
+\frame
+{
+  \frametitle{Frekvenční distribuce lemmatu}
+  \begin{block}{Blok 1}
+  Lorem ipsum dolor sit amet, \alert{consectetuer adipiscing elit}. Etiam
+lobortis facilisis sem. Nullam nec mi et neque pharetra sollicitudin.
+Praesent imperdiet mi nec ante.
+  \end{block}
+  \begin{alertblock}{Blok 2 (alerted)}
+  \begin{itemize}
+    \item Lorem ipsum dolor sit amet
+    \begin{enumerate}
+      \item Etiam lobortis facilisis sem
+      \item Nullam nec mi et neque pharetra sollicitudin
+    \end{enumerate}
+    \item Praesent imperdiet mi nec ante
+    \begin{enumerate}
+      \item Consectetuer adipiscing elit
+      \item Etiam lobortis facilisis sem
+    \end{enumerate}
+  \end{itemize}
+  \end{alertblock}
+}
+
+\frame
+{
+  \frametitle{Frekvenční distribuce lemmatu}
+  \begin{exampleblock}{Blok 1 (example)}
+  Lorem ipsum dolor sit amet, \alert{consectetuer adipiscing elit}. Etiam
+lobortis facilisis sem. Nullam nec mi et neque pharetra sollicitudin.
+Praesent imperdiet mi nec ante.
+  \end{exampleblock}
+  \begin{block}{Blok 2}
+  \begin{itemize}
+    \item Lorem ipsum dolor sit amet
+    \begin{enumerate}
+      \item Etiam lobortis facilisis sem
+      \item Nullam nec mi et neque pharetra sollicitudin
+    \end{enumerate}
+    \item Praesent imperdiet mi nec ante
+    \begin{enumerate}
+      \item Consectetuer adipiscing elit
+      \item Etiam lobortis facilisis sem
+    \end{enumerate}
+  \end{itemize}
+  \end{block}
+}
+
+\section{Kapitola B}
+
+\frame
+{
+  \frametitle{Slajd bez bloků}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam
+lobortis facilisis sem. Nullam nec mi et neque pharetra sollicitudin.
+Praesent imperdiet mi nec ante.
+
+  \begin{itemize}
+    \item Lorem ipsum dolor sit amet
+    \begin{enumerate}
+      \item Etiam lobortis facilisis sem
+      \item Nullam nec mi et neque pharetra sollicitudin
+    \end{enumerate}
+    \item Praesent imperdiet mi nec ante
+    \begin{enumerate}
+      \item Consectetuer adipiscing elit
+      \item Etiam lobortis facilisis sem
+    \end{enumerate}
+  \end{itemize}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam
+lobortis facilisis sem. Nullam nec mi et neque pharetra sollicitudin.
+Praesent imperdiet mi nec ante.
+
+}
+
+\makeThanks{Thanks for all the fish!}
+
+\end{document}

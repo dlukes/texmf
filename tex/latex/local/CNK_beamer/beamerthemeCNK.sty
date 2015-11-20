@@ -1,0 +1,301 @@
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 3.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeCNK}[2013/09/13 CNK beamer theme]
+\RequirePackage{ifthen}
+
+\newboolean{@useenglish}
+\setboolean{@useenglish}{false}
+
+\DeclareOption{english}{
+  \setboolean{@useenglish}{true}
+}
+
+\ProcessOptions
+
+\ifthenelse{\boolean{@useenglish}}{
+  \RequirePackage[english,czech]{babel}
+  \selectlanguage{english}
+}{
+  \RequirePackage[czech,english]{babel}
+  \selectlanguage{czech}
+}
+
+\mode<presentation>
+
+% suppress navigation bar
+\beamertemplatenavigationsymbolsempty
+
+% define colors
+%\definecolor{cnkMagenta}{cmyk}{0,1,0,0}
+%\definecolor{cnkCyan}{cmyk}{1,0,0,0}
+%\definecolor{cnkGreen}{cmyk}{0.7,0,1,0}
+%\definecolor{cnkOrange}{cmyk}{0,0.71,1,0}
+%\definecolor{cnkBlack}{cmyk}{0,0,0,1}
+\definecolor{cnkMagenta}{RGB}{222, 9, 118}
+\definecolor{cnkCyan}{RGB}{0, 158, 224}
+\definecolor{cnkGreen}{RGB}{83, 169, 36}
+\definecolor{cnkOrange}{RGB}{233, 103, 8}
+\definecolor{cnkBlack}{RGB}{25, 23, 28}
+
+
+% set colors
+\setbeamercolor{blackstripe}{bg=cnkBlack,fg=white}
+\setbeamercolor{orangestripe}{bg=cnkOrange}
+\setbeamercolor{greenstripe}{bg=cnkGreen}
+\setbeamercolor{cyanstripe}{bg=cnkCyan}
+\setbeamercolor{magentastripe}{bg=cnkMagenta}
+
+\setbeamercolor{title}{fg=cnkBlack}
+\setbeamercolor{subtitle}{fg=cnkBlack}
+\setbeamercolor{author}{fg=cnkBlack}
+\setbeamercolor{frametitle}{fg=cnkBlack}%,fg=white}
+\setbeamercolor{section name}{fg=red,bg=blue}
+\setbeamercolor{structure}{fg=cnkBlack}
+\setbeamercolor{block title}{fg=cnkBlack}
+\setbeamercolor{block title}{bg=cnkBlack!40}
+\setbeamercolor{block body}{bg=cnkBlack!10}
+\setbeamercolor{block title alerted}{fg=cnkBlack}
+\setbeamercolor{block title alerted}{bg=cnkOrange!40}
+\setbeamercolor{block body alerted}{bg=cnkOrange!10}
+\setbeamercolor{block title example}{fg=cnkBlack}
+\setbeamercolor{block title example}{bg=cnkCyan!40}
+\setbeamercolor{block body example}{bg=cnkCyan!10}
+\setbeamercolor{alerted text}{fg=cnkMagenta}
+
+\setbeamertemplate{blocks}[]
+
+% set fonts
+\setbeamerfont{title}{size=\Huge,series=\bfseries}
+%\setbeamerfont{author}{size=\large,series=\normalfont}
+
+
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+
+% ----------------------------------------------------------------------------
+% *** TITLE PAGE <<<
+% ----------------------------------------------------------------------------
+
+\defbeamertemplate*{title page}{CNK theme}
+{
+  {
+    \begin{changemargin}{-1cm}{-1cm}
+    \setlength{\fboxsep}{12pt}%
+    \setlength{\fboxrule}{0pt}%
+      \ifthenelse{\boolean{@useenglish}}
+      {
+        \fbox{\includegraphics[width=0.18\paperwidth]{beamerthemeCNK/logo-cerne-en}}
+      }
+      {
+        \fbox{\includegraphics[width=0.18\paperwidth,frame]{beamerthemeCNK/logo-cerne-cs}}
+      }
+    \end{changemargin}
+  }
+  \begin{center}
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \ifx\insertsubtitle\@empty%
+  \else%
+    \vskip3ex%
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+  \fi%
+  \vskip3ex%
+  \ifx\insertauthor\@empty%
+  \else%
+    {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+  \fi%
+  \vskip30ex%
+  \end{center}
+}
+
+% ----------------------------------------------------------------------------
+% *** END TITLE PAGE >>>
+% ----------------------------------------------------------------------------
+
+
+% ----------------------------------------------------------------------------
+% *** HEADLINE <<<
+% ----------------------------------------------------------------------------
+%\defbeamertemplate*{headline}{CNK theme}%
+%{
+%}
+% ----------------------------------------------------------------------------
+% *** END HEADLINE <<<
+% ----------------------------------------------------------------------------
+
+% ----------------------------------------------------------------------------
+% *** FRAMETITLE <<<
+% ----------------------------------------------------------------------------
+\defbeamertemplate*{frametitle}{CNK theme}%
+{
+  \vskip2ex
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\bfseries\insertframetitle}%
+}
+% ----------------------------------------------------------------------------
+% *** END FRAMETITLE <<<
+% ----------------------------------------------------------------------------
+
+
+% ----------------------------------------------------------------------------
+% *** FOOTLINE <<<
+% ----------------------------------------------------------------------------
+
+\defbeamertemplate*{footline}{CNK theme}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.78\paperwidth,ht=0.06\paperwidth,dp=1ex,left]{blackstripe}%
+  %  \ifnum\c@framenumber=1
+  %  \else
+  %\ifbeamer@plainframe
+  %\else
+      \hskip0.03\paperwidth
+      \ifthenelse{\boolean{@useenglish}}
+      {
+        \includegraphics[width=0.25\paperwidth]{beamerthemeCNK/logo-bile-ploche-en}
+      }
+      {
+        \includegraphics[width=0.25\paperwidth]{beamerthemeCNK/logo-bile-ploche-cs}
+      }
+      \vskip0.006\paperwidth
+  %\fi
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{blankstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{orangestripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{blankstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{greenstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{blankstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{cyanstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{blankstripe}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{magentastripe}%
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% ----------------------------------------------------------------------------
+% *** END of FOOTLINE >>>
+% ----------------------------------------------------------------------------
+
+
+
+\mode
+<all>
+
+\def\makeCNK{
+  \bgroup
+  \setbeamercolor{background canvas}{bg=cnkBlack}
+  \begin{frame}[plain]
+  \begin{center}
+    \vskip3ex
+    \ifthenelse{\boolean{@useenglish}}
+    {
+      \includegraphics[width=0.33\paperwidth]{beamerthemeCNK/logo-bile-en}
+    }
+    {
+      \includegraphics[width=0.33\paperwidth]{beamerthemeCNK/logo-bile-cs}
+    }
+  \end{center}
+  \end{frame}
+  \egroup
+}
+
+\def\maketitle{
+  \bgroup
+  \setbeamertemplate{footline}{
+    \leavevmode%
+    \hbox{%
+    \begin{beamercolorbox}[wd=.78\paperwidth,ht=0.06\paperwidth,dp=1ex,left]{blackstripe}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{blankstripe}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{orangestripe}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{blankstripe}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{greenstripe}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{blankstripe}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{cyanstripe}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.01\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{blankstripe}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.045\paperwidth,ht=0.06\paperwidth,dp=1ex,center]{magentastripe}%
+    \end{beamercolorbox}}%
+    \vskip0pt%
+  }
+  \begin{frame}
+    \titlepage
+  \end{frame}
+  \egroup
+}
+
+
+\def\makeThanks #1{
+  \bgroup
+  \setbeamercolor{background canvas}{bg=cnkBlack}
+  \begin{frame}[plain]
+  \begin{center}
+    \vskip17ex
+    \textcolor{white}{\Large\bfseries #1}
+
+    \vskip2em
+    \textcolor{white}{\texttt{https://github.com/dlukes}}
+
+    \vskip16ex
+    \ifthenelse{\boolean{@useenglish}}
+    {
+      \includegraphics[width=0.33\paperwidth]{beamerthemeCNK/logo-bile-ploche-en}
+    }
+    {
+      \includegraphics[width=0.33\paperwidth]{beamerthemeCNK/logo-bile-ploche-cs}
+    }
+  \end{center}
+  \end{frame}
+  \egroup
+}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \begin{changemargin}{-1\beamer@leftmargin}{0cm}
+      \leavevmode%
+      \hbox{%
+      \begin{beamercolorbox}[wd=2.4ex,ht=3.4ex,center]{orangestripe}%
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.6ex,ht=3.4ex,center]{blankstripe}%
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=2.4ex,ht=3.4ex,center]{greenstripe}%
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.6ex,ht=3.4ex,center]{blankstripe}%
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=2.4ex,ht=3.4ex,center]{cyanstripe}%
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.6ex,ht=3.4ex,center]{blankstripe}%
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=2.4ex,ht=3.4ex,center]{magentastripe}%
+      \end{beamercolorbox}}%
+      \begin{beamercolorbox}[wd=1ex,ht=3.4ex,center]{blankstripe}%
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[ht=3.4ex,left,sep=-.15ex, dp=0ex]{blankstripe}% ht=3.4ex, sep=-.15ex
+        \LARGE{\insertsection}\LARGE{\color{white}Ij}%
+      \end{beamercolorbox}%
+    \end{changemargin}
+  \end{frame}
+}
