@@ -1,0 +1,27 @@
+I painstakingly reformatted everything on March 27th, 2017, so just use Emacs's
+BibTeX mode, =C-c C-c= for cleaning up / checking entries, =C-c C-q= for
+filling them, =bibtex-sort-buffer= for sorting the buffer and you'll be fine.
+Don't fuck things up with biber.
+
+* Cleanup and formatting
+
+*WARNING*: Biber might mess with stuff you don't want it to mess with (field
+names, case, =pdf= renamed to =file=, =poster= and =slides= fields removed,
+etc.). Use wisely, only if you need to do some major reformatting. If you
+don't, just use it for validation and discard the output. Use Emacs's bibtex
+mode features for preserving consistency on a day-to-day basis.
+
+Sort, re-arrange, normalize and have warnings raised using biber:
+
+#+BEGIN_SRC sh
+biber --tool --output_align --output_indent=2 --output_fieldcase=lower <filename.bib>
+#+END_SRC
+
+Inspect the result and warnings, fix the rest of the stuff manually, then =M-x
+bibtex-reformat=.
+
+* PDFLaTeX compatible bibliography
+
+#+BEGIN_SRC sh
+biber --tool --output-safechars *.bib -O <path/to/output.bib>
+#+END_SRC
